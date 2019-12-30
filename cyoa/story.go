@@ -134,7 +134,6 @@ func defaultPathFn(r *http.Request) string {
 func (h handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	path := h.pathFn(r)
 
-	//	  				["intro"]
 	if chapter, ok := h.s[path]; ok {
 		err := h.t.Execute(w, chapter)
 		if err != nil {
