@@ -1,3 +1,5 @@
+// cyoa is a package for building Choose Your Own Adventure
+// stories that can be rendered via the resulting http.Handler
 package cyoa
 
 import (
@@ -10,18 +12,34 @@ import (
 )
 
 func init() {
-	tpl = template.Must(template.New("").Parse(defaultHandlerTemplate))
+	tpl = template.Must(template.New("").Parse(defaultHandlerTmpl))
 }
 
 var tpl *template.Template
 
-var defaultHandlerTemplate = `
+var defaultHandlerTmpl = `
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Choose Your Own Adventure</title>
-	</head>
+  <head>
+    <meta charset="utf-8">
+    <title>Choose Your Own Adventure</title>
+  </head>
+  <body>
+    <section class="page">
+      <h1>{{.Title}}</h1>
+      {{range .Paragraphs}}
+        <p>{{.}}</p>
+      {{end}}
+      {{if .Options}}
+        <ul>
+        {{range .Options}}
+          <li><a href="/{{.Chapter}}">{{.Text}}</a></li>
+        {{end}}
+        </ul>
+      {{else}}
+        <h3>The End</h3>
+      {{end}}
+    </section>
     <style>
       body {
         font-family: helvetica, arial;
@@ -62,22 +80,7 @@ var defaultHandlerTemplate = `
         text-indent: 1em;
       }
     </style>
-	<body>
-		<section class="page">
-			<h1>{{.Title}}</h1>
-			{{range .Paragraphs}}
-				<p>{{.}}</p>
-			{{end}}
-
-			<ul>
-				{{range .Options}}
-				<li>
-					<a href="/{{.Chapter}}">{{.Text}}</a>
-				</li>
-				{{end}}
-			</ul>
-		</section>
-    </body>
+  </body>
 </html>`
 
 // HandlerOptions are used with the NewHandler function to
@@ -127,10 +130,9 @@ func defaultPathFn(r *http.Request) string {
 	if path == "" || path == "/" {
 		path = "/intro"
 	}
-
-	// "/intro" => "intro"
 	return path[1:]
 }
+
 func (h handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	path := h.pathFn(r)
 
