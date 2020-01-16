@@ -18,6 +18,7 @@ func main() {
 	if err != nil {
 		exit(fmt.Sprintf("Failed to open the CSV file: %s\n", *csvFilename))
 	}
+
 	r := csv.NewReader(file)
 
 	lines, err := r.ReadAll()

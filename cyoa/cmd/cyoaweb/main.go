@@ -9,7 +9,7 @@ import (
 	"os"
 	"strings"
 
-	"gopher-exercises/cyoa"
+  "my-go-code/cyoa"
 )
 
 func main() {
