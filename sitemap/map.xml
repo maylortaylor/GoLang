@@ -2,10 +2,16 @@
 
 <urlset xmlsns="http://www.sitemap.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://gophercises.com/demos/cyoa/home</loc>
+    <loc>https://gophercises.com/demos/cyoa/denver</loc>
+  </url>
+  <url>
+    <loc>https://gophercises.com</loc>
   </url>
   <url>
     <loc>https://gophercises.com/demos/cyoa/debate</loc>
+  </url>
+  <url>
+    <loc>https://gophercises.com/demos/cyoa/home</loc>
   </url>
   <url>
     <loc>http://gophercises.com</loc>
@@ -15,12 +21,6 @@
   </url>
   <url>
     <loc>https://gophercises.com/demos/cyoa/</loc>
-  </url>
-  <url>
-    <loc>https://gophercises.com/demos/cyoa/denver</loc>
-  </url>
-  <url>
-    <loc>https://gophercises.com</loc>
   </url>
   <url>
     <loc>https://gophercises.com/demos/cyoa/new-york</loc>
