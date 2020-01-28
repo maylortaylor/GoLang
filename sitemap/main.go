@@ -1,12 +1,14 @@
 package main
 
 import (
+	"encoding/xml"
 	"flag"
 	"fmt"
 	"io"
 	link "my-go-code/html-link-parser"
 	"net/http"
 	"net/url"
+	"os"
 	"strings"
 )
 
@@ -33,9 +35,32 @@ func main() {
 	flag.Parse()
 
 	pages := bfs(*urlFlag, *maxDepth)
-	for _, page := range pages {
-		fmt.Println(page)
+
+	toXml := urlset{
+		Xmlns: xmlns,
 	}
+	for _, page := range pages {
+		toXml.Urls = append(toXml.Urls, loc{page})
+	}
+
+	fmt.Println(xml.Header)
+	enc := xml.NewEncoder(os.Stdout)
+	enc.Indent("", "  ")
+	if err := enc.Encode(toXml); err != nil {
+		panic(err)
+	}
+	fmt.Println()
+}
+
+const xmlns = "http://www.sitemap.org/schemas/sitemap/0.9"
+
+type loc struct {
+	Value string `xml:"loc"`
+}
+
+type urlset struct {
+	Urls  []loc  `xml:"url"`
+	Xmlns string `xml:"xmlsns,attr"`
 }
 
 type empty struct{}

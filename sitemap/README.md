@@ -6,6 +6,19 @@
 ![video status: unreleased](https://img.shields.io/badge/video%20status-unreleased-red.svg?style=flat-square)
 ![code status: unreleased](https://img.shields.io/badge/code%20status-unreleased-red.svg?style=flat-square)
 
+## Running The App
+
+```
+  go run main.go
+
+  // print to .xml file
+  go run main.go > map.xml
+
+  // flags
+  go run main.go -url http://gophercises.com
+  go run main.go -depth 3
+```
+
 ## Exercise details
 
 A sitemap is basically a map of all of the pages within a specific domain. They are used by search engines and other tools to inform them of all of the pages on your domain.
