@@ -5,7 +5,11 @@
 
 ## Running the App
 ```
-go run main.go < came.in
+// camel
+go run main.go < camel.in
+
+// cipher
+go run main.go < caesar.in
 ```
 
 ## Exercise details
